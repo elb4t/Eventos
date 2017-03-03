@@ -1,0 +1,40 @@
+{"eventos" :
+   {
+   "carnaval" : {
+      "id" : "carnaval",
+      "ciudad" : "Rio de Janeiro",
+      "evento" : "Carnaval",
+      "fecha" : "21/02/2017",
+      "imagen" : "https://pixabay.com/static/uploads/photo/2014/08/06/11/51/carnival-411494_960_720.jpg"
+   },
+   "fallas" : {
+      "id" : "fallas",
+      "ciudad" : "Valencia",
+      "evento" : "Fallas",
+      "fecha" : "19/03/2017",
+      "imagen" : "https://pixabay.com/static/uploads/photo/2015/03/22/18/12/failures-685055_960_720.jpg"
+   },
+   "nochevieja" : {
+      "id" : "nochevieja",
+      "ciudad" : "Nueva York",
+      "evento" : "Nochevieja",
+      "fecha" : "31/12/2016",
+      "imagen" :
+     "https://pixabay.com/static/uploads/photo/2013/02/10/15/35/fireworks-80187_960_720.jpg"
+   },
+   "sanjuan" : {
+      "id" : "sanjuan",
+      "ciudad" : "Alicante","evento" : "Noche de San Juan",
+      "fecha" : "23/06/2017",
+      "imagen" :
+     "https://pixabay.com/static/uploads/photo/2013/06/30/18/29/midsummer-142484_960_720.jpg"
+   },
+   "semanasanta" : {
+      "id" : "semanasanta",
+      "ciudad" : "Sevilla",
+      "evento" : "Semana Santa",
+      "fecha" : "14/04/2017",
+      "imagen" : "https://pixabay.com/static/uploads/photo/2016/03/17/10/08/easter-1262664_960_720.jpg"
+   }
+} 
+}
