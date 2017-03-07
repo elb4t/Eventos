@@ -22,3 +22,8 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+configurations {
+    all*.exclude group: 'xpp3', module: 'xpp3'
+    compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
+}

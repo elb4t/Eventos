@@ -3,6 +3,8 @@ package tk.elb4t.eventos;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -57,6 +59,10 @@ public class ActividadPrincipal extends AppCompatActivity {
             editor.commit();
             FirebaseMessaging.getInstance().subscribeToTopic("Todos");
         }
+
+        ActivityCompat.requestPermissions(ActividadPrincipal.this,
+                new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+
     }
 
     private boolean comprobarGooglePlayServices() {
@@ -119,5 +125,19 @@ public class ActividadPrincipal extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (!(grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    Toast.makeText(ActividadPrincipal.this,
+                            "Permiso denegado para mantener escribir en el almacenamiento.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 }
