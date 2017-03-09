@@ -122,6 +122,11 @@ public class EventoDetalles extends AppCompatActivity {
                 intent.putExtra("evento", evento);
                 startActivity(intent);
                 break;
+            case R.id.action_acercaDe:
+                Intent intentWeb = new Intent(getBaseContext(), EventosWeb.class);
+                intentWeb.putExtra("evento", evento);
+                startActivity(intentWeb);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
