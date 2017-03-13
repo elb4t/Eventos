@@ -6,9 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -32,6 +37,10 @@ public class EventosAplicacion extends Application {
     private FirebaseStorage storage;
     private static StorageReference storageRef;
 
+    static FirebaseRemoteConfig mFirebaseRemoteConfig;
+    static String colorFondo;
+    static Boolean acercaDe;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -42,6 +51,31 @@ public class EventosAplicacion extends Application {
 
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://eventos-3161f.appspot.com");
+
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings =
+                new FirebaseRemoteConfigSettings
+                        .Builder().setDeveloperModeEnabled(BuildConfig.DEBUG).build();
+        mFirebaseRemoteConfig.setConfigSettings(configSettings);
+        mFirebaseRemoteConfig.setDefaults(R.xml.remote_config_default);
+
+        long cacheExpiration = 60;
+        mFirebaseRemoteConfig.fetch(cacheExpiration)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        mFirebaseRemoteConfig.activateFetched();
+                        getColorFondo();
+                        getAcercaDe();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        colorFondo = mFirebaseRemoteConfig.getString("color_fondo");
+                        acercaDe = mFirebaseRemoteConfig.getBoolean("acerca_de");
+                    }
+                });
     }
 
     public static Context getAppContext() {
@@ -185,4 +219,9 @@ public class EventosAplicacion extends Application {
     public static StorageReference getStorageReference() {
         return storageRef;
     }
+
+    private void getColorFondo() {
+        colorFondo = mFirebaseRemoteConfig.getString("color_fondo"); }
+    private void getAcercaDe() {
+        acercaDe = mFirebaseRemoteConfig.getBoolean("acera_de"); }
 }

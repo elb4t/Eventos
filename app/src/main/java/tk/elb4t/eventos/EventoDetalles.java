@@ -40,6 +40,8 @@ import java.io.InputStream;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static tk.elb4t.eventos.EventosAplicacion.acercaDe;
+
 /**
  * Created by eloy on 3/3/17.
  */
@@ -99,6 +101,8 @@ public class EventoDetalles extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detalles, menu);
+        if (!acercaDe) {
+            menu.removeItem(R.id.action_acercaDe); }
         return true;
     }
 
